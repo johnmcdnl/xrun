@@ -5,20 +5,13 @@ import (
 )
 
 type Suite struct {
-	TestCases []TestCase
-	StepDefs []StepDef
+	TestCases []*TestCase
+	StepDefs  []*StepDef
 }
 
 func (s *Suite)Run() {
 	fmt.Println("(s *Suite)Run()")
 	for _, tc := range s.TestCases {
-		tc.Run()
+		s.RunTestCase(tc)
 	}
-
-	var sd StepDef
-	var fn = func(){
-		fmt.Println("hello")
-	}
-	sd.Handler=fn
-	sd.Run()
 }

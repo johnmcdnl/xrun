@@ -1,9 +1,9 @@
 package xrun
 
 type Runner struct {
-	Builder  Builder
-	Suite    Suite
-	Reporter Reporter
+	Builder  *Builder
+	Suite    *Suite
+	Reporter *Reporter
 }
 
 func (r *Runner)Run() {
