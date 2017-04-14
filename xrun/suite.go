@@ -1,17 +1,19 @@
 package xrun
 
-import (
-	"fmt"
-)
-
 type Suite struct {
-	TestCases []*TestCase
-	StepDefs  []*StepDef
+	Features []*Feature `json:"features"`
+	StepDefs  []*StepDef `json:"-"`
+}
+
+func NewSuite() *Suite {
+	var s Suite
+	s.Features = make([]*Feature, 0)
+	s.StepDefs = make([]*StepDef, 0)
+	return &s
 }
 
 func (s *Suite)Run() {
-	fmt.Println("(s *Suite)Run()")
-	for _, tc := range s.TestCases {
-		s.RunTestCase(tc)
+	for _, f := range s.Features {
+		s.RunFeature(f)
 	}
 }

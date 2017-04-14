@@ -8,10 +8,14 @@ import (
 type StepDef struct {
 	Regexp  *regexp.Regexp
 	Handler interface{}
-	Args    []interface{}
+	Args    []string
 }
 
 func (sd *StepDef) Run() {
+	if sd == nil {
+		return
+	}
+
 	var values []reflect.Value
 	for _, arg := range sd.Args {
 		values = append(values, reflect.ValueOf(arg))

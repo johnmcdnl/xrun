@@ -1,16 +1,17 @@
 package xrun
 
-import "fmt"
+import (
+	"github.com/cucumber/gherkin-go"
+)
 
-type TestCase struct {
-	Steps []*Step
+type Scenario struct {
+	*gherkin.Pickle
+	Steps []*Step  `json:"steps"`
 }
 
-func (s *Suite)RunTestCase(tc *TestCase) {
-
-	for _, step := range tc.Steps {
-		s.RunStep(step)
+func (suite *Suite) RunScenario(scenario *Scenario) {
+	for _, step := range scenario.Steps {
+		suite.RunStep(step)
 	}
 
-	fmt.Println("(tc *TestCase)Run()")
 }
