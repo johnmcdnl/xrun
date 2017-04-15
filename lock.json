@@ -1,60 +1,20 @@
 {
-    "memo": "515b344fdf316fc23d9ad8de92fab7f72fed4dfda317979708eae61aaf094e7c",
+    "memo": "b9a70ff261727292e8860179cf09073b1d36f2f9f9d734ed28e97048815d51de",
     "projects": [
         {
             "name": "github.com/cucumber/gherkin-go",
-            "version": "v4.0.0",
-            "revision": "7f42e9ea3855d6ebf8b87ba83e32dcbfd50f8d41",
-            "packages": [
-                "."
-            ]
-        },
-        {
-            "name": "github.com/davecgh/go-spew",
-            "version": "v1.1.0",
-            "revision": "a7a0063072ed89d04285d3d3362aa590ed9f7878",
-            "packages": [
-                "spew"
-            ]
-        },
-        {
-            "name": "github.com/gucumber/gucumber",
             "branch": "master",
-            "revision": "71608e2f6e76fd4da5b09a376aeec7a5c0b5edbc",
+            "revision": "6ade3b20b388ec10311a46bd28b2fe1dcdcaad83",
             "packages": [
                 "."
             ]
         },
         {
             "name": "github.com/pkg/errors",
-            "version": "v0.8.0",
-            "revision": "645ef00459ed84a119197bfb8d8205042c6df63d",
-            "packages": [
-                "."
-            ]
-        },
-        {
-            "name": "github.com/pmezard/go-difflib",
-            "version": "v1.0.0",
-            "revision": "c0b812dadcf4498dede02bb7f0c5c478be997e34",
-            "packages": [
-                "difflib"
-            ]
-        },
-        {
-            "name": "github.com/shiena/ansicolor",
             "branch": "master",
-            "revision": "a422bbe96644373c5753384a59d678f7d261ff10",
+            "revision": "ff09b135c25aae272398c51a07235b90a75aa4f0",
             "packages": [
                 "."
-            ]
-        },
-        {
-            "name": "github.com/stretchr/testify",
-            "version": "v1.1.4",
-            "revision": "69483b4bd14f5845b5a1e55bca19e954e827f1d0",
-            "packages": [
-                "assert"
             ]
         }
     ]

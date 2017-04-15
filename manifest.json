@@ -1,1 +1,10 @@
-{}
+{
+    "dependencies": {
+        "github.com/cucumber/gherkin-go": {
+            "branch": "master"
+        },
+        "github.com/pkg/errors": {
+            "branch": "master"
+        }
+    }
+}
