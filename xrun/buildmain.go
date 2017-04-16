@@ -78,7 +78,6 @@ func generateMain(baseImportPath string, imports map[string]string) error {
 		path = strings.Join(strings.SplitAfter(path, "/")[1:], "")
 		body = fmt.Sprint(body, fmt.Sprintf(`"%s/%s"`, baseImportPath, path), "\n")
 	}
-	body = fmt.Sprint(body, `"fmt"`, "\n")
 	body = fmt.Sprint(body, ")\n")
 
 	body = fmt.Sprint(body, `var (`, "\n")
@@ -88,7 +87,7 @@ func generateMain(baseImportPath string, imports map[string]string) error {
 	body = fmt.Sprint(body, `)`, "\n")
 
 	body = fmt.Sprint(body, `func main() {`, "\n")
-	body = fmt.Sprint(body, `fmt.Println("_XRUN_MAIN.go")`, "\n")
+	body = fmt.Sprint(body, `new(xrun.Runner).New().Run()`, "\n")
 	body = fmt.Sprint(body, `}`, "\n")
 
 	err := os.MkdirAll(filepath.Join(TestDir, "_xrun"), os.ModePerm)
