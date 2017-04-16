@@ -2,7 +2,6 @@ package xrun
 
 import (
 	"regexp"
-	"fmt"
 )
 
 //Could create global Suite and clone it when execution starts
@@ -10,7 +9,6 @@ var GlobalStepDefStore []*StepDef
 
 func store(match string, fn interface{}) {
 	var stepDef StepDef
-	fmt.Println(match)
 	stepDef.Regexp = regexp.MustCompile(match)
 	stepDef.Handler = fn
 	GlobalStepDefStore = append(GlobalStepDefStore, &stepDef)

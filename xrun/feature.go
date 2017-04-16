@@ -1,7 +1,6 @@
 package xrun
 
 import (
-	"fmt"
 	"github.com/cucumber/gherkin-go"
 )
 
@@ -16,6 +15,4 @@ func (s *Suite)runFeature(f *Feature) {
 	for _, scenario := range f.Scenarios {
 		s.runScenario(scenario)
 	}
-
-	fmt.Println("(tc *TestCase)Run()")
 }

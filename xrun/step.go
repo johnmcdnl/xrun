@@ -2,7 +2,6 @@ package xrun
 
 import (
 	"github.com/cucumber/gherkin-go"
-	"fmt"
 	"github.com/pkg/errors"
 )
 
@@ -11,7 +10,6 @@ type Step struct {
 }
 
 func (s *Suite)runStep(step *Step) {
-	fmt.Println(step.Text)
 	stepDef, err := s.findMatchingStepDef(step)
 	if err != nil {
 		//fmt.Println(err)

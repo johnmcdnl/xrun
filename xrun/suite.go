@@ -1,7 +1,5 @@
 package xrun
 
-import "fmt"
-
 type Suite struct {
 	Features []*Feature `json:"features"`
 	StepDefs  []*StepDef `json:"-"`
@@ -16,7 +14,6 @@ func newSuite() *Suite {
 
 func (s *Suite)runSuite() {
 	for _, f := range s.Features {
-		fmt.Println(f.Name)
 		s.runFeature(f)
 	}
 }
