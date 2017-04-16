@@ -1,5 +1,5 @@
 {
-    "memo": "b9a70ff261727292e8860179cf09073b1d36f2f9f9d734ed28e97048815d51de",
+    "memo": "52254c8908c891e3fb9b3573036c3e965d3750ffd4f228fd7bb0520331ab1fe8",
     "projects": [
         {
             "name": "github.com/cucumber/gherkin-go",
@@ -10,11 +10,43 @@
             ]
         },
         {
+            "name": "github.com/fatih/color",
+            "version": "v1.4.1",
+            "revision": "9131ab34cf20d2f6d83fdc67168a5430d1c7dc23",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/mattn/go-colorable",
+            "version": "v0.0.7",
+            "revision": "d228849504861217f796da67fae4f6e347643f15",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/mattn/go-isatty",
+            "version": "v0.0.2",
+            "revision": "fc9e8d8ef48496124e79ae0df75490096eccf6fe",
+            "packages": [
+                "."
+            ]
+        },
+        {
             "name": "github.com/pkg/errors",
             "branch": "master",
             "revision": "ff09b135c25aae272398c51a07235b90a75aa4f0",
             "packages": [
                 "."
+            ]
+        },
+        {
+            "name": "golang.org/x/sys",
+            "branch": "master",
+            "revision": "f3918c30c5c2cb527c0b071a27c35120a6c0719a",
+            "packages": [
+                "unix"
             ]
         }
     ]

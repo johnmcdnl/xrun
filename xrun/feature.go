@@ -2,6 +2,7 @@ package xrun
 
 import (
 	"github.com/cucumber/gherkin-go"
+	"github.com/fatih/color"
 )
 
 type Feature struct {
@@ -12,6 +13,8 @@ type Feature struct {
 
 
 func (s *Suite)runFeature(f *Feature) {
+	color.New(color.FgWhite, color.Bold).Print("Feature: ")
+	color.White(f.Name)
 	for _, scenario := range f.Scenarios {
 		s.runScenario(scenario)
 	}

@@ -3,6 +3,8 @@ package xrun
 import (
 	"github.com/cucumber/gherkin-go"
 	"github.com/pkg/errors"
+	"fmt"
+	"github.com/fatih/color"
 )
 
 type Step struct {
@@ -15,6 +17,8 @@ func (s *Suite)runStep(step *Step) {
 		//fmt.Println(err)
 	}
 	stepDef.runStepDef()
+
+	color.Green(fmt.Sprint("\t\t ", step.Text))
 }
 
 func (s *Suite)findMatchingStepDef(step *Step) (*StepDef, error) {
