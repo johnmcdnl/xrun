@@ -10,15 +10,14 @@ import (
 	"path"
 )
 
-const FeaturesDir = "./internal/features"
-
 var (
-	TestDir = filepath.ToSlash(path.Join("./", "internal"))
+	stepDefRootDir = filepath.ToSlash(path.Join("internal"))
+	featuresRootDir = filepath.ToSlash(path.Join("internal", "features"))
 )
 
 func (r *Runner)BuildAndRun() {
-	os.MkdirAll(FeaturesDir, os.ModePerm)
-	os.MkdirAll(TestDir, os.ModePerm)
+	os.MkdirAll(featuresRootDir, os.ModePerm)
+	os.MkdirAll(stepDefRootDir, os.ModePerm)
 	s := NewSuite()
 	s.Features = gherkinToFeatures()
 	s.StepDefs = GetStepDefs()
@@ -36,7 +35,7 @@ func GetStepDefs() []*StepDef {
 }
 
 func gherkinToFeatures() []*Feature {
-	featureFiles, _ := filesWithExt(FeaturesDir, ".feature")
+	featureFiles, _ := filesWithExt(featuresRootDir, ".feature")
 
 	var gherkinDocuments = []*gherkin.GherkinDocument{}
 

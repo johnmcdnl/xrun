@@ -29,7 +29,7 @@ func Build(dir string) {
 }
 
 func Run() {
-	cmd := exec.Command("go", "run", filepath.Join(TestDir, "_xrun", "main.go"))
+	cmd := exec.Command("go", "run", filepath.Join(stepDefRootDir, "_xrun", "main.go"))
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
@@ -47,7 +47,7 @@ func baseImportPath(dir string) string {
 func writeImportFiles(dir string) map[string]string {
 	var paths = make(map[string]string)
 	filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
-		if info.Name() == TestDir {
+		if info.Name() == stepDefRootDir {
 			return nil
 		}
 		if info.IsDir() && info.Name() != "_xrun" {
@@ -91,11 +91,11 @@ func generateMain(baseImportPath string, imports map[string]string) error {
 	body = fmt.Sprint(body, `new(xrun.Runner).New().Run()`, "\n")
 	body = fmt.Sprint(body, `}`, "\n")
 
-	err := os.MkdirAll(filepath.Join(TestDir, "_xrun"), os.ModePerm)
+	err := os.MkdirAll(filepath.Join(stepDefRootDir, "_xrun"), os.ModePerm)
 	if err != nil {
 		//	return err
 	}
-	err = ioutil.WriteFile(filepath.Join(TestDir, "_xrun", "main.go"), []byte(body), os.ModePerm)
+	err = ioutil.WriteFile(filepath.Join(stepDefRootDir, "_xrun", "main.go"), []byte(body), os.ModePerm)
 	if err != nil {
 		return err
 	}
