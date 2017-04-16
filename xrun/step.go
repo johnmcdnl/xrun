@@ -22,7 +22,17 @@ func (s *Suite)RunStep(step *Step) {
 func (s *Suite)FindMatchingStepDef(step *Step) (*StepDef, error) {
 	var bestMatch *StepDef
 	for _, sd := range s.StepDefs {
+		fmt.Println()
+		fmt.Println()
+		fmt.Println()
+		fmt.Println("sd", sd)
+		fmt.Println()
+		fmt.Println()
+		fmt.Println()
 		if match := sd.Regexp.FindStringSubmatch(step.Text); match != nil {
+			if bestMatch==nil{
+				bestMatch=sd
+			}
 			if bestMatch.Regexp == nil || len(sd.Regexp.String()) > len(bestMatch.Regexp.String()) {
 				bestMatch = sd
 				bestMatch.Args = match[1:]

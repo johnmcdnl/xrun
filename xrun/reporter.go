@@ -8,6 +8,4 @@ type Reporter struct {
 
 func (r *Reporter)Run(){
 	fmt.Println("(r *Reporter)Run()")
-	fmt.Println("(r *Reporter)Run()")
-	fmt.Println("(r *Reporter)Run()")
 }
