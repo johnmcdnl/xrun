@@ -78,6 +78,7 @@ func generateMain(baseImportPath string, imports map[string]string) error {
 		path = strings.Join(strings.SplitAfter(path, "/")[1:], "")
 		body = fmt.Sprint(body, fmt.Sprintf(`"%s/%s"`, baseImportPath, path), "\n")
 	}
+	body = fmt.Sprint(body, `"github.com/johnmcdnl/xrun/xrun"`)
 	body = fmt.Sprint(body, ")\n")
 
 	body = fmt.Sprint(body, `var (`, "\n")
