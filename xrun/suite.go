@@ -7,16 +7,16 @@ type Suite struct {
 	StepDefs  []*StepDef `json:"-"`
 }
 
-func NewSuite() *Suite {
+func newSuite() *Suite {
 	var s Suite
 	s.Features = make([]*Feature, 0)
 	s.StepDefs = make([]*StepDef, 0)
 	return &s
 }
 
-func (s *Suite)Run() {
+func (s *Suite)runSuite() {
 	for _, f := range s.Features {
 		fmt.Println(f.Name)
-		s.RunFeature(f)
+		s.runFeature(f)
 	}
 }

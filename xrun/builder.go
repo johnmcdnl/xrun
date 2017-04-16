@@ -18,19 +18,19 @@ var (
 func (r *Runner)BuildAndRun() {
 	os.MkdirAll(featuresRootDir, os.ModePerm)
 	os.MkdirAll(stepDefRootDir, os.ModePerm)
-	s := NewSuite()
+	s := newSuite()
 	s.Features = gherkinToFeatures()
-	s.StepDefs = GetStepDefs()
+	s.StepDefs = getStepDefs()
 	r.Suite = s
 
-	r.Suite.Run()
-	r.Reporter.Run()
+	r.Suite.runSuite()
+	r.Reporter.run()
 
 	j, _ := json.MarshalIndent(r.Suite, "", "\t")
 	ioutil.WriteFile("suite.json", j, os.ModePerm)
 }
 
-func GetStepDefs() []*StepDef {
+func getStepDefs() []*StepDef {
 	return GlobalStepDefStore
 }
 

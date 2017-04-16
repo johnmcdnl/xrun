@@ -11,7 +11,7 @@ type StepDef struct {
 	Args    []string
 }
 
-func (sd *StepDef) Run() {
+func (sd *StepDef) runStepDef() {
 	if sd == nil {
 		return
 	}

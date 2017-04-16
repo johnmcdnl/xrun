@@ -18,17 +18,17 @@ var IMPORTED = true
 func BuildAndRunDir(dir string) {
 	defer cleanImportFiles(dir)
 	cleanImportFiles(dir)
-	Build(dir)
-	Run()
+	buildDir(dir)
+	runCmd()
 }
 
-func Build(dir string) {
+func buildDir(dir string) {
 	baseImportPath := baseImportPath(dir)
 	importPaths := writeImportFiles(dir)
 	generateMain(baseImportPath, importPaths)
 }
 
-func Run() {
+func runCmd() {
 	cmd := exec.Command("go", "run", filepath.Join(stepDefRootDir, "_xrun", "main.go"))
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

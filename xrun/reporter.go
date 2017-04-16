@@ -6,6 +6,6 @@ type Reporter struct {
 
 }
 
-func (r *Reporter)Run(){
+func (r *Reporter)run(){
 	fmt.Println("(r *Reporter)Run()")
 }

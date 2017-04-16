@@ -10,16 +10,16 @@ type Step struct {
 	*gherkin.PickleStep
 }
 
-func (s *Suite)RunStep(step *Step) {
+func (s *Suite)runStep(step *Step) {
 	fmt.Println(step.Text)
-	stepDef, err := s.FindMatchingStepDef(step)
+	stepDef, err := s.findMatchingStepDef(step)
 	if err != nil {
 		//fmt.Println(err)
 	}
-	stepDef.Run()
+	stepDef.runStepDef()
 }
 
-func (s *Suite)FindMatchingStepDef(step *Step) (*StepDef, error) {
+func (s *Suite)findMatchingStepDef(step *Step) (*StepDef, error) {
 	var bestMatch *StepDef
 	for _, sd := range s.StepDefs {
 		fmt.Println()

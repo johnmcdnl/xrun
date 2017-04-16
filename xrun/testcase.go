@@ -9,9 +9,9 @@ type Scenario struct {
 	Steps []*Step  `json:"steps"`
 }
 
-func (suite *Suite) RunScenario(scenario *Scenario) {
+func (suite *Suite) runScenario(scenario *Scenario) {
 	for _, step := range scenario.Steps {
-		suite.RunStep(step)
+		suite.runStep(step)
 	}
 
 }

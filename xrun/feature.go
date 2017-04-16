@@ -12,9 +12,9 @@ type Feature struct {
 }
 
 
-func (s *Suite)RunFeature(f *Feature) {
+func (s *Suite)runFeature(f *Feature) {
 	for _, scenario := range f.Scenarios {
-		s.RunScenario(scenario)
+		s.runScenario(scenario)
 	}
 
 	fmt.Println("(tc *TestCase)Run()")
