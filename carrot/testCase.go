@@ -6,19 +6,20 @@ import (
 
 type TestCase struct {
 	*gherkin.Pickle
-	Steps []*TestStep
+	TestSteps []*TestStep `json:"steps,omitempty"`
 }
 
 func (tsr *TestSuiteRunner)RunTestCase(tc *TestCase) {
-	for _, ts := range tc.Steps {
+	for _, ts := range tc.TestSteps {
 		tsr.RunTestStep(ts)
 	}
 }
 
 func (tc *TestCase)BuildTestCase(pickle *gherkin.Pickle) {
+	tc.Pickle = pickle
 	for _, step := range pickle.Steps {
 		var ts TestStep
 		ts.BuildTestStep(step)
-		tc.Steps=append(tc.Steps, &ts)
+		tc.TestSteps =append(tc.TestSteps, &ts)
 	}
 }

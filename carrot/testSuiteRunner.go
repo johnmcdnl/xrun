@@ -3,7 +3,7 @@ package carrot
 type TestSuiteRunner struct {
 	contexts      []*TestContext
 	suiteStepDefs []StepDefinition
-	TestFeatures  []*TestFeature
+	TestFeatures  []*TestFeature `json:"features,omitempty"`
 }
 
 func (tsr *TestSuiteRunner)Run() {
