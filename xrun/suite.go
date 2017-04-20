@@ -22,6 +22,7 @@ func (s *Suite)getContext(id string) *TestContext {
 
 	return tc
 }
+
 func newSuite() *Suite {
 	var s Suite
 	s.Features = make([]*Feature, 0)
