@@ -9,8 +9,17 @@ type TestStep struct {
 	*gherkin.PickleStep
 }
 
-func (tsr *TestSuiteRunner)RunTestStep(tc *TestStep) {
-	fmt.Println(tc.Text)
+func (tsr *TestSuiteRunner)RunTestStep(ts *TestStep) {
+	match := tsr.findMatchingStepDefinition(ts.Text)
+	if match == nil {
+		tsr.AddMissingTestStep(ts)
+		return
+	}
+	fmt.Println(ts.Text, match)
+}
+
+func (tsr *TestSuiteRunner)AddMissingTestStep(ts *TestStep) {
+	tsr.MissingSteps = append(tsr.MissingSteps, ts)
 }
 
 func (ts *TestStep)BuildTestStep(step *gherkin.PickleStep) {

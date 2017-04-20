@@ -5,6 +5,7 @@ import "github.com/johnmcdnl/xrun/carrot"
 func main() {
 //	xrun.BuildAndRunDir("./internal")
 	//new(xrun.Runner).New().Run()
-	new(carrot.TestSuite).Build()
-	new(carrot.TestSuite).Run()
+	var ts carrot.TestSuite
+	ts.Build()
+	ts.Run()
 }

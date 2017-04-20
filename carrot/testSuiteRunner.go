@@ -2,8 +2,9 @@ package carrot
 
 type TestSuiteRunner struct {
 	contexts      []*TestContext
-	suiteStepDefs []StepDefinition
+	suiteStepDefs []*StepDefinition
 	TestFeatures  []*TestFeature `json:"features,omitempty"`
+	MissingSteps  []*TestStep
 }
 
 func (tsr *TestSuiteRunner)Run() {
@@ -14,12 +15,10 @@ func (tsr *TestSuiteRunner)Run() {
 
 func (tsr *TestSuiteRunner)BuildTestFeatures(dir string) {
 	files, _ := filesWithExt(dir, ".feature")
-	for _, featureFilePath := range files{
+	for _, featureFilePath := range files {
 		var tf TestFeature
 		tf.BuildTestFeatures(featureFilePath)
-		tsr.TestFeatures=append(tsr.TestFeatures, &tf)
+		tsr.TestFeatures = append(tsr.TestFeatures, &tf)
 	}
-
-
 
 }
