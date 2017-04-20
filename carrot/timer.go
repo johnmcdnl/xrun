@@ -3,7 +3,7 @@ package carrot
 import "time"
 
 type Timers struct {
-	Timers []Timer
+	Timers []*Timer
 }
 
 type Timer struct {
