@@ -7,8 +7,8 @@ type Feature struct {
 	Scenarios []Scenario
 }
 
-func (s *Suite)RunFeature(f *Feature) {
-	for _, s := range f.Scenarios {
-		s.RunScenario()
+func (suite *Suite)RunFeature(f *Feature) {
+	for _, scenario := range f.Scenarios {
+		suite.RunScenario(scenario)
 	}
 }

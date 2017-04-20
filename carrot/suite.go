@@ -12,9 +12,9 @@ type Suite struct {
 	Features      []*Feature
 }
 
-func (s *Suite)Run() {
-	for _, f := range s.Features {
-		f.RunFeature(f)
+func (suite *Suite)Run() {
+	for _, feature := range suite.Features {
+		suite.RunFeature(feature)
 	}
 }
 
