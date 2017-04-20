@@ -1,5 +1,5 @@
 {
-    "memo": "52254c8908c891e3fb9b3573036c3e965d3750ffd4f228fd7bb0520331ab1fe8",
+    "memo": "d3134279e18592c20968abc9c45c5ff2a2fd5c9f84ab34ef815a6d850270dfb2",
     "projects": [
         {
             "name": "github.com/cucumber/gherkin-go",
@@ -7,6 +7,14 @@
             "revision": "6ade3b20b388ec10311a46bd28b2fe1dcdcaad83",
             "packages": [
                 "."
+            ]
+        },
+        {
+            "name": "github.com/davecgh/go-spew",
+            "version": "v1.1.0",
+            "revision": "a7a0063072ed89d04285d3d3362aa590ed9f7878",
+            "packages": [
+                "spew"
             ]
         },
         {
@@ -39,6 +47,30 @@
             "revision": "ff09b135c25aae272398c51a07235b90a75aa4f0",
             "packages": [
                 "."
+            ]
+        },
+        {
+            "name": "github.com/pmezard/go-difflib",
+            "version": "v1.0.0",
+            "revision": "792786c7400a136282c1664665ae0a8db921c6c2",
+            "packages": [
+                "difflib"
+            ]
+        },
+        {
+            "name": "github.com/satori/uuid",
+            "version": "v1.1.0",
+            "revision": "879c5887cd475cd7864858769793b2ceb0d44feb",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/stretchr/testify",
+            "version": "v1.1.4",
+            "revision": "69483b4bd14f5845b5a1e55bca19e954e827f1d0",
+            "packages": [
+                "assert"
             ]
         },
         {

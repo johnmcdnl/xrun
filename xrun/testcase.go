@@ -11,12 +11,28 @@ type Scenario struct {
 	Steps []*Step  `json:"steps"`
 }
 
-func (suite *Suite) runScenario(scenario *Scenario) {
+func (suite *Suite) runScenario(tCtx *TestContext, scenario *Scenario) {
 	color.New(color.FgWhite, color.Bold).Print("\t Scenario: ")
 	color.White(scenario.Name)
-	fmt.Println()
-	for _, step := range scenario.Steps {
-		suite.runStep(step)
-	}
 
+	var scenarioIsFailed bool
+	for _, step := range scenario.Steps {
+		//Make function call so can be go xxxFun()
+		if scenarioIsFailed{
+			color.Yellow(fmt.Sprint("\t\t ", step.Text))
+			continue
+		}
+		suite.runStep(tCtx, step)
+		if step.IsPassed{
+			step.IsPassed = true
+			color.Green(fmt.Sprint("\t\t ", step.Text))
+			scenarioIsFailed = false
+		}
+		if !step.IsPassed{
+			step.IsPassed = false
+			color.Red(fmt.Sprint("\t\t ", step.Text))
+			scenarioIsFailed = true
+		}
+	}
+	fmt.Println()
 }

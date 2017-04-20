@@ -3,39 +3,54 @@ package xrun
 import (
 	"github.com/cucumber/gherkin-go"
 	"github.com/pkg/errors"
-	"fmt"
-	"github.com/fatih/color"
 )
 
 type Step struct {
 	*gherkin.PickleStep
+	StepResult
 }
 
-func (s *Suite)runStep(step *Step) {
-	stepDef, err := s.findMatchingStepDef(step)
+type StepResult struct {
+	IsExecuted      bool `json:"isExecuted,omitempty"`
+	IsPassed        bool `json:"isPassed,omitempty"`
+	HasMatchingStep bool `json:"hasMatchingStep,omitempty"`
+	Errors          []*TestError `json:"errors,omitempty"`
+}
+
+func (s *Suite)runStep(tCtx *TestContext, step *Step) {
+	stepDef, err := s.findMatchingStepDef(tCtx, step)
 	if err != nil {
-		//fmt.Println(err)
+		return
 	}
-	stepDef.runStepDef()
+	step.HasMatchingStep = true
 
-	color.Green(fmt.Sprint("\t\t ", step.Text))
+	if testErrors := stepDef.runStepDef(tCtx); len(testErrors) > 0 {
+		step.Errors = testErrors
+		step.IsExecuted = true
+		step.IsPassed = false
+		return
+	}
+	step.IsExecuted = true
+	step.IsPassed = true
+
 }
 
-func (s *Suite)findMatchingStepDef(step *Step) (*StepDef, error) {
+func (s *Suite)findMatchingStepDef(tCtx *TestContext, step *Step) (*StepDef, error) {
 	var bestMatch *StepDef
 	for _, sd := range s.StepDefs {
 		if match := sd.Regexp.FindStringSubmatch(step.Text); match != nil {
-			if bestMatch==nil{
-				bestMatch=sd
+			if bestMatch == nil {
+				bestMatch = sd
 			}
-			if bestMatch.Regexp == nil || len(sd.Regexp.String()) > len(bestMatch.Regexp.String()) {
+			if bestMatch.Regexp != nil || len(sd.Regexp.String()) > len(bestMatch.Regexp.String()) {
 				bestMatch = sd
 				bestMatch.Args = match[1:]
 			}
 		}
 	}
-	if bestMatch==nil{
+	if bestMatch == nil {
 		return nil, errors.New("No match found")
 	}
+
 	return bestMatch, nil
 }
