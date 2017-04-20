@@ -1,8 +1,8 @@
 package carrot
 
 type TestSuiteRunner struct {
-	Contexts      []*TestContext
-	SuiteStepDefs []StepDefinition
+	contexts      []*TestContext
+	suiteStepDefs []StepDefinition
 	TestFeatures  []*TestFeature
 }
 
