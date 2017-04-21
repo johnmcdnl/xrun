@@ -1,22 +1,18 @@
 package carrot
 
-type TestContext struct {
-	Id       string
-	data     map[string]interface{}
-	TestingT interface{}
+import (
+	"context"
+	"github.com/johnmcdnl/xrun/xrun"
+)
+
+func T(ctx context.Context) *xrun.TestingT {
+	return ctx.Value("testingT").(*xrun.TestingT)
 }
 
-func NewContext(id string) *TestContext {
-	var tc TestContext
-	tc.Id = id
-	tc.data = make(map[string]interface{})
-	return &tc
+func AddData(ctx context.Context, key string, value interface{}) context.Context {
+	return context.WithValue(ctx, key, value)
 }
 
-func (tc *TestContext)Add(key string, value interface{}) {
-	tc.data[key] = value
-}
-
-func (tc *TestContext)Get(key string) interface{} {
-	return tc.data[key]
+func GetData(ctx context.Context, key string) interface{} {
+	return ctx.Value(key)
 }

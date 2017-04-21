@@ -7,16 +7,19 @@ import (
 )
 
 type TestFeature struct {
-	Id string
+	Id        string
 	*gherkin.Feature
 	TestCases []*TestCase `json:"testCases,omitempty"`
 	Children  []interface{} `json:"children,omitempty"`
 }
 
 func (tsr *TestSuiteRunner)RunTestFeature(testFeature *TestFeature) {
+	defer testfeatureSync.Done()
 	for _, testCase := range testFeature.TestCases {
-		tsr.RunTestCase(testCase)
+		testCaseSync.Add(1)
+		go tsr.RunTestCase(testCase)
 	}
+	testCaseSync.Wait()
 }
 
 func (tf *TestFeature)BuildTestFeatures(path string) {

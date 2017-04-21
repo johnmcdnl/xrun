@@ -12,14 +12,16 @@ type TestStep struct {
 	*gherkin.PickleStep
 }
 
-func (tsr *TestSuiteRunner)RunTestStep(tCtx context.Context, ts *TestStep) {
-	sd := tsr.findMatchingStepDefinition(ts.Text)
+func (tsr *TestSuiteRunner)RunTestStep(ctx context.Context, testStep *TestStep) {
+	defer testStepSync.Done()
+	sd := tsr.findMatchingStepDefinition(testStep.Text)
 	if sd == nil || sd.match == nil {
-		tsr.AddMissingTestStep(ts)
+		tsr.AddMissingTestStep(testStep)
 		return
 	}
-	err := sd.Execute(tCtx, ts)
+	err := sd.Execute(ctx, testStep)
 	fmt.Sprint(err)
+
 }
 
 func (tsr *TestSuiteRunner)AddMissingTestStep(ts *TestStep) {

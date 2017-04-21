@@ -4,6 +4,7 @@ import (
 	"github.com/cucumber/gherkin-go"
 	"github.com/satori/uuid"
 	"context"
+	"fmt"
 )
 
 type TestCase struct {
@@ -12,12 +13,16 @@ type TestCase struct {
 	TestSteps []*TestStep `json:"steps,omitempty"`
 }
 
+
 func (tsr *TestSuiteRunner)RunTestCase(tc *TestCase) {
-	var ctx context.Context
-	ctx = context.WithValue(ctx, "id", tc.Id)
-	for _, ts := range tc.TestSteps {
-		tsr.RunTestStep(ctx, ts)
+	defer testCaseSync.Done()
+	ctx := context.WithValue(context.Background(), "id", tc.Id)
+	fmt.Println(ctx)
+	for _, testStep := range tc.TestSteps {
+		testStepSync.Add(1)
+		go tsr.RunTestStep(ctx, testStep)
 	}
+	testStepSync.Wait()
 }
 
 func (tc *TestCase)BuildTestCase(pickle *gherkin.Pickle) {

@@ -55,23 +55,23 @@ func (sd *StepDefinition)isMatch(text string) ([]string, bool) {
 	return matches, true
 }
 
-func (sd *StepDefinition)Execute(tCtx context.Context, step *TestStep) error {
+var dummyCtx = context.WithValue(context.Background(), "", "")
 
-	fmt.Println(sd.params, fmt.Sprint(step.Arguments))
-	if len(step.Arguments) > 0 {
-		fmt.Println(reflect.TypeOf(step.Arguments[0]))
-	}
+func (sd *StepDefinition)Execute(ctx context.Context, step *TestStep) error {
 
 	var values []reflect.Value
-	values = append(values, reflect.ValueOf(tCtx))
+	values = append(values, reflect.ValueOf(ctx))
 
 	fnType := reflect.ValueOf(sd.fn).Type()
 	for m, i := 0, 0; i < fnType.NumIn(); i++ {
 		param := fnType.In(i)
 		var v interface{}
 		switch param.Kind() {
-		case reflect.TypeOf(&TestContext{}).Kind():
-			continue
+		case reflect.Interface:
+			if param.String() == "context.Context" {
+				continue
+			}
+			fmt.Println("SHOULD NOT BE HERE!")
 		case reflect.String:
 			v = sd.params[m]
 			m++
@@ -87,12 +87,12 @@ func (sd *StepDefinition)Execute(tCtx context.Context, step *TestStep) error {
 			v, _ = strconv.ParseFloat(sd.params[m], 64)
 			m++
 		default:
-			fmt.Println(sd.params)
+			fmt.Println("BAH HUMBUG", reflect.TypeOf(ctx), reflect.TypeOf(dummyCtx), param.String(), param.Kind())
 		}
 
 		values = append(values, reflect.ValueOf(v))
 	}
 
-	fmt.Println(tCtx.Id)
+	fmt.Println(ctx.Value("id"))
 	return nil
 }
