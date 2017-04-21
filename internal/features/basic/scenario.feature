@@ -11,7 +11,11 @@ Feature: Scenarios
 
   Scenario: Basic usage
     Given I have an initial step
+      | hello | test |
     And I have a second step
+    """
+    BLAH BLAH BLAH
+    """
     Then this scenario should execute 1 time and pass
     And setup was called 1 time
 

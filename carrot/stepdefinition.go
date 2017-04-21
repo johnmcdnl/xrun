@@ -2,6 +2,9 @@ package carrot
 
 import (
 	"regexp"
+	"fmt"
+	"reflect"
+	"strconv"
 )
 
 var GlobalStepDefinition []*StepDefinition
@@ -49,4 +52,46 @@ func (sd *StepDefinition)isMatch(text string) ([]string, bool) {
 		return matches, false
 	}
 	return matches, true
+}
+
+func (sd *StepDefinition)Execute(tCtx *TestContext, step *TestStep) error {
+
+	fmt.Println(sd.params, fmt.Sprint(step.Arguments))
+	if len(step.Arguments) > 0 {
+		fmt.Println(reflect.TypeOf(step.Arguments[0]))
+	}
+
+	var values []reflect.Value
+	values = append(values, reflect.ValueOf(tCtx))
+
+	fnType := reflect.ValueOf(sd.fn).Type()
+	for m, i := 0, 0; i < fnType.NumIn(); i++ {
+		param := fnType.In(i)
+		var v interface{}
+		switch param.Kind() {
+		case reflect.TypeOf(&TestContext{}).Kind():
+			continue
+		case reflect.String:
+			v = sd.params[m]
+			m++
+		case reflect.Int:
+			i, _ := strconv.ParseInt(sd.params[m], 10, 32)
+			v = int(i)
+			m++
+		case reflect.Int64:
+			i, _ := strconv.ParseInt(sd.params[m], 10, 32)
+			v = int64(i)
+			m++
+		case reflect.Float64:
+			v, _ = strconv.ParseFloat(sd.params[m], 64)
+			m++
+		default:
+			fmt.Println(sd.params)
+		}
+
+		values = append(values, reflect.ValueOf(v))
+	}
+
+	fmt.Println(tCtx.Id)
+	return nil
 }

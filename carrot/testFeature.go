@@ -3,9 +3,11 @@ package carrot
 import (
 	"github.com/cucumber/gherkin-go"
 	"os"
+	"github.com/satori/uuid"
 )
 
 type TestFeature struct {
+	Id string
 	*gherkin.Feature
 	TestCases []*TestCase `json:"testCases,omitempty"`
 	Children  []interface{} `json:"children,omitempty"`
@@ -18,6 +20,7 @@ func (tsr *TestSuiteRunner)RunTestFeature(testFeature *TestFeature) {
 }
 
 func (tf *TestFeature)BuildTestFeatures(path string) {
+	tf.Id = uuid.NewV4().String()
 	file, _ := os.Open(path)
 	defer file.Close()
 	gd, _ := gherkin.ParseGherkinDocument(file)

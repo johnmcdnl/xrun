@@ -2,7 +2,6 @@ package carrot
 
 import (
 	"fmt"
-	"time"
 )
 
 type TestSuiteRunner struct {
@@ -16,6 +15,17 @@ func (tsr *TestSuiteRunner)Run() {
 	for _, feature := range tsr.TestFeatures {
 		tsr.RunTestFeature(feature)
 	}
+}
+
+func (tsr *TestSuiteRunner)GetContext(id string) *TestContext {
+	for _, tCtx := range tsr.contexts {
+		if tCtx.Id == id {
+			return tCtx
+		}
+	}
+	tCtx := NewContext(id)
+	tsr.contexts = append(tsr.contexts, tCtx)
+	return tsr.GetContext(id)
 }
 
 func (tsr *TestSuiteRunner)PrintMissingStepDefinitions() {

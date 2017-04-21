@@ -2,18 +2,23 @@ package carrot
 
 import (
 	"github.com/cucumber/gherkin-go"
+	"fmt"
+	"github.com/satori/uuid"
 )
 
 type TestStep struct {
+	Id string
 	*gherkin.PickleStep
 }
 
-func (tsr *TestSuiteRunner)RunTestStep(ts *TestStep) {
-	match := tsr.findMatchingStepDefinition(ts.Text)
-	if match == nil || match.match == nil {
+func (tsr *TestSuiteRunner)RunTestStep(tCtx *TestContext, ts *TestStep) {
+	sd := tsr.findMatchingStepDefinition(ts.Text)
+	if sd == nil || sd.match == nil {
 		tsr.AddMissingTestStep(ts)
 		return
 	}
+	err := sd.Execute(tCtx, ts)
+	fmt.Sprint(err)
 }
 
 func (tsr *TestSuiteRunner)AddMissingTestStep(ts *TestStep) {
@@ -21,5 +26,6 @@ func (tsr *TestSuiteRunner)AddMissingTestStep(ts *TestStep) {
 }
 
 func (ts *TestStep)BuildTestStep(step *gherkin.PickleStep) {
+	ts.Id = uuid.NewV4().String()
 	ts.PickleStep = step
 }
