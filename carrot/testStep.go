@@ -2,7 +2,6 @@ package carrot
 
 import (
 	"github.com/cucumber/gherkin-go"
-	"fmt"
 )
 
 type TestStep struct {
@@ -11,11 +10,10 @@ type TestStep struct {
 
 func (tsr *TestSuiteRunner)RunTestStep(ts *TestStep) {
 	match := tsr.findMatchingStepDefinition(ts.Text)
-	if match == nil {
+	if match == nil || match.match == nil {
 		tsr.AddMissingTestStep(ts)
 		return
 	}
-	fmt.Println(ts.Text, match)
 }
 
 func (tsr *TestSuiteRunner)AddMissingTestStep(ts *TestStep) {

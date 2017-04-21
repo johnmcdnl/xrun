@@ -1,5 +1,10 @@
 package carrot
 
+import (
+	"fmt"
+	"time"
+)
+
 type TestSuiteRunner struct {
 	contexts      []*TestContext
 	suiteStepDefs []*StepDefinition
@@ -11,6 +16,10 @@ func (tsr *TestSuiteRunner)Run() {
 	for _, feature := range tsr.TestFeatures {
 		tsr.RunTestFeature(feature)
 	}
+}
+
+func (tsr *TestSuiteRunner)PrintMissingStepDefinitions() {
+	fmt.Println("Missing Step Defs: ", tsr.MissingSteps)
 }
 
 func (tsr *TestSuiteRunner)BuildTestFeatures(dir string) {

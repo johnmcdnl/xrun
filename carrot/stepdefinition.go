@@ -2,8 +2,14 @@ package carrot
 
 import (
 	"regexp"
-	"fmt"
 )
+
+var GlobalStepDefinition []*StepDefinition
+
+func Step(text string, fn interface{}) {
+	var sd = StepDefinition{match: regexp.MustCompile(text), fn:fn}
+	GlobalStepDefinition = append(GlobalStepDefinition, &sd)
+}
 
 type StepDefinition struct {
 	match  *regexp.Regexp
@@ -34,7 +40,6 @@ func (tsr *TestSuiteRunner)findMatchingStepDefinition(text string) *StepDefiniti
 		}
 
 	}
-	fmt.Println(matchSd)
 	return matchSd
 }
 
