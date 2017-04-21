@@ -3,6 +3,7 @@ package carrot
 import (
 	"github.com/cucumber/gherkin-go"
 	"github.com/satori/uuid"
+	"context"
 )
 
 type TestCase struct {
@@ -12,8 +13,10 @@ type TestCase struct {
 }
 
 func (tsr *TestSuiteRunner)RunTestCase(tc *TestCase) {
+	var ctx context.Context
+	ctx = context.WithValue(ctx, "id", tc.Id)
 	for _, ts := range tc.TestSteps {
-		tsr.RunTestStep(tsr.GetContext(tc.Id), ts)
+		tsr.RunTestStep(ctx, ts)
 	}
 }
 

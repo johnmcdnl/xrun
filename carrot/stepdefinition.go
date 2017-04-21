@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
+	"context"
 )
 
 var GlobalStepDefinition []*StepDefinition
@@ -54,7 +55,7 @@ func (sd *StepDefinition)isMatch(text string) ([]string, bool) {
 	return matches, true
 }
 
-func (sd *StepDefinition)Execute(tCtx *TestContext, step *TestStep) error {
+func (sd *StepDefinition)Execute(tCtx context.Context, step *TestStep) error {
 
 	fmt.Println(sd.params, fmt.Sprint(step.Arguments))
 	if len(step.Arguments) > 0 {

@@ -4,6 +4,7 @@ import (
 	"github.com/cucumber/gherkin-go"
 	"fmt"
 	"github.com/satori/uuid"
+	"context"
 )
 
 type TestStep struct {
@@ -11,7 +12,7 @@ type TestStep struct {
 	*gherkin.PickleStep
 }
 
-func (tsr *TestSuiteRunner)RunTestStep(tCtx *TestContext, ts *TestStep) {
+func (tsr *TestSuiteRunner)RunTestStep(tCtx context.Context, ts *TestStep) {
 	sd := tsr.findMatchingStepDefinition(ts.Text)
 	if sd == nil || sd.match == nil {
 		tsr.AddMissingTestStep(ts)
